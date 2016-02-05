@@ -1,28 +1,16 @@
-/**
- * This file provided by Facebook is for non-commercial testing and evaluation
- * purposes only. Facebook reserves all rights not expressly granted.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * FACEBOOK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
- * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
- * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-
 var Comment = React.createClass({
-  rawMarkup: function() {
-    var rawMarkup = marked(this.props.children.toString(), { sanitize: true });
-    return { __html: rawMarkup };
+  rawMarkUp: function() {
+    var rawMarked = marked(this.props.children.toString(), { sanitize: true });
+    return { __html: rawMarked };
   },
 
   render: function() {
     return (
-      <div className="comment">
-        <h2 className="commentAuthor">
-          {this.props.author}
-        </h2>
-        <span dangerouslySetInnerHTML={this.rawMarkup()} />
+      <div className='comment'>
+      <h2 className='commentAuthor'>
+      {this.props.author}
+      </h2>
+      <span dangerouslySetInnerHTML={this.rawMarkUp()} />
       </div>
     );
   },
@@ -78,10 +66,10 @@ var CommentBox = React.createClass({
 
   render: function() {
     return (
-      <div className="commentBox">
+      <div className='commentBox'>
         <h1>Comments</h1>
         <CommentList data={this.state.data} />
-        <CommentForm onCommentSubmit={this.handleCommentSubmit} />
+        <CommentForm onCommentSubmit={this.handleCommentSubmit}/>
       </div>
     );
   },
@@ -92,14 +80,14 @@ var CommentList = React.createClass({
     var commentNodes = this.props.data.map(function(comment) {
       return (
         <Comment author={comment.author} key={comment.id}>
-          {comment.text}
+        {comment.text}
         </Comment>
       );
     });
 
     return (
-      <div className="commentList">
-        {commentNodes}
+      <div className='commentList'>
+      {commentNodes}
       </div>
     );
   },
@@ -107,16 +95,16 @@ var CommentList = React.createClass({
 
 var CommentForm = React.createClass({
   getInitialState: function() {
-    return { author: '', text: '' };
-  },
+      return { author: '', text: '' };
+    },
 
   handleAuthorChange: function(e) {
-    this.setState({ author: e.target.value });
-  },
+      this.setState({ author: e.target.value });
+    },
 
   handleTextChange: function(e) {
-    this.setState({ text: e.target.value });
-  },
+      this.setState({ text: e.target.value });
+    },
 
   handleSubmit: function(e) {
     e.preventDefault();
@@ -132,26 +120,26 @@ var CommentForm = React.createClass({
 
   render: function() {
     return (
-      <form className="commentForm" onSubmit={this.handleSubmit}>
+      <form className='commentForm' onSubmit={this.handleSubmit}>
         <input
-          type="text"
-          placeholder="Your name"
-          value={this.state.author}
-          onChange={this.handleAuthorChange}
+          type='text'
+          placeholder='your name'
+          value= {this.state.author}
+          onChange= {this.handleAuthorChange}
         />
         <input
-          type="text"
-          placeholder="Say something..."
-          value={this.state.text}
-          onChange={this.handleTextChange}
+          type='text'
+          placeholder='say somthin'
+          value= {this.state.text}
+          onChange= {this.handleTextChange}
         />
-        <input type="submit" value="Post" />
+        <input type='submit' value='Post' />
       </form>
     );
   },
 });
 
 ReactDOM.render(
-  <CommentBox url="/api/comments" pollInterval={2000} />,
+  <CommentBox url='/api/comments' pollInterval={2000}/>,
   document.getElementById('content')
 );
